@@ -26,7 +26,9 @@ function PublishBlog() {
                     <button onClick ={async() =>{
                         const response = await axios.post(`${CLOUD_BACKEND_URL}/api/v1/blog`, {
                             title, 
-                            description
+                            content:description
+                        }, {
+                            headers:{Authorization: localStorage.getItem('token')}
                         })
                         navigate(`/blogs/${response.id}`)
                     }} 
