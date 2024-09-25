@@ -19,7 +19,12 @@ function BlogDetails({blog} :{blog:Blog}) {
                         posted on 2nd Dec 2023
                     </div>
                     <div className="text-xl font-light pt-4">
-                        {`${blog.content}`}
+                        {blog.content.split('\n').map((line, index) => (
+                            <span key={index}>
+                            {line}
+                            <br />
+                            </span>
+                        ))}
                     </div>
                 </div>
                 {/* about author component */}

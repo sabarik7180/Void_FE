@@ -3,6 +3,8 @@ import axios from "axios";
 import { CLOUD_BACKEND_URL } from "../config";
 import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function PublishBlog() {
     const [title, setTitle] = useState("");
@@ -10,6 +12,18 @@ function PublishBlog() {
     const navigate = useNavigate()
     return ( 
         <div >
+            <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
             <AppBar newBlogBtn={false}/>
             <div className="flex flex-col items-center w-full h-full p-4" >
                 {/* title of the blog */}
@@ -24,13 +38,18 @@ function PublishBlog() {
                         setDescription(e.target.value);
                     }}/>
                     <button onClick ={async() =>{
-                        const response = await axios.post(`${CLOUD_BACKEND_URL}/api/v1/blog`, {
-                            title, 
-                            content:description
-                        }, {
-                            headers:{Authorization: localStorage.getItem('token')}
-                        })
-                        navigate(`/blogs/${response.id}`)
+                        if(title=='' || description=='' || description==null||title==null ){
+                            toast.error('please provide both title as well as description')
+                        }else{
+                            const response = await axios.post(`${CLOUD_BACKEND_URL}/api/v1/blog`, {
+                                title, 
+                                content:description
+                            }, {
+                                headers:{Authorization: localStorage.getItem('token')}
+                            })
+                            navigate(`/blogs/${response.data.id}`)
+                        }
+                        
                     }} 
                     type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                             Post comment
@@ -40,6 +59,8 @@ function PublishBlog() {
         </div>
      );
 }
+
+export default PublishBlog;
 
 function BlogBody({onChange}:{onChange : (e:ChangeEvent<HTMLTextAreaElement>) =>void}){
     return (
@@ -53,5 +74,3 @@ function BlogBody({onChange}:{onChange : (e:ChangeEvent<HTMLTextAreaElement>) =>
         </div>
     )
 }
-
-export default PublishBlog;
