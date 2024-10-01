@@ -3,7 +3,7 @@ import AppBar from "./AppBar";
 import { Avatar } from "./AvatarGenerator";
 
 
-function BlogDetails({blog} :{blog:Blog}) {
+function BlogDetails({blog} :{blog?:Blog}) {
     return ( 
     <div>
         <AppBar />
@@ -13,13 +13,13 @@ function BlogDetails({blog} :{blog:Blog}) {
                 <div className="col-span-8 border-r-4 p-4 flex justify-center flex-col">
                     {/* title component */}
                     <div className="text-5xl font-extrabold	"> 
-                        {`${blog.title}`}
+                        {`${blog?.title}`}
                     </div>
                     <div className="text-base font-light pt-2">
                         posted on 2nd Dec 2023
                     </div>
                     <div className="text-xl font-light pt-4">
-                        {blog.content.split('\n').map((line, index) => (
+                        {blog?.content.split('\n').map((line, index) => (
                             <span key={index}>
                             {line}
                             <br />
@@ -36,11 +36,11 @@ function BlogDetails({blog} :{blog:Blog}) {
                     <div className=" text-lg flex w-full">
 
                         <div className="pl-2 pr-2 flex flex-col justify-center">      
-                            <Avatar name = {`${blog.author.name}`} size='big'/>
+                            <Avatar name = {`${blog?.author.name}`} size='big'/>
                         </div>
                         <div>
                             <div className="text-xl font-bold">
-                                {`${blog.author.name}`} 
+                                {`${blog?.author.name}`} 
                             </div>
                             <div className="pt-2 text-slate-500">
                                 randomn catch phrase about authors journey in the Void
