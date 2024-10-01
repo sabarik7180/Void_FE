@@ -16,7 +16,6 @@ export const  useBlogOnId = ({id}:{id:string}) =>{
     const [loading, setLoading] = useState(true);
     const [blogs, setBlogs] = useState<Blog>();
     const token = localStorage.getItem('token');
-    console.log("Loading 1")
         useEffect(() =>{
             axios.get(`${CLOUD_BACKEND_URL}/api/v1/blog/${id}`, {
                 headers: {
@@ -25,10 +24,10 @@ export const  useBlogOnId = ({id}:{id:string}) =>{
             })  
             .then((response) =>{
                 setBlogs(response.data);
+                console.log("loading"+loading);
                 setLoading(false);
             })
         },[id]);
-    console.log("Loading 2")
         return {
             loading, 
             blogs
@@ -49,7 +48,9 @@ export const UseBlogs = () => {
         })  
         .then((response) =>{
             setBlogs(response.data);
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1500);
         })
     },[]);
 
