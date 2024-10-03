@@ -3,12 +3,10 @@ import BlogCard from "../components/blogComponent";
 import {UseBlogs} from "../hooks";
 function Blog() {
     const {loading,blogs} =UseBlogs();
-
     return ( 
         <div>
             <AppBar />
                 <div className="flex justify-center">
-                 
                 <div className="w-4/6"> 
                     {blogs.map(blog => <BlogCard 
                     id={blog.id}

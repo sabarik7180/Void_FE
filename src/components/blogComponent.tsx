@@ -13,7 +13,6 @@ interface BlogCardPropsWithLoadingStatus{
 
 function BlogCard({id, authorName, title, content, publishedDate , loading}: BlogCardPropsWithLoadingStatus) {
     
-
     return (
 <>
             {loading ? 
