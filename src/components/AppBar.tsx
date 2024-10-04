@@ -15,7 +15,7 @@ function AppBar({ newBlogBtn = true }: { newBlogBtn?: boolean })  {
     let userDetails : CustomJwtPayload | null = null;
     if(token) {
      try{
-        userDetails =  jwtDecode<CustomJwtPayload>(token)
+        userDetails =  jwtDecode<CustomJwtPayload>(token) as CustomJwtPayload;
         console.log(userDetails)
      } catch {
         toast.error('Invalid Token')
