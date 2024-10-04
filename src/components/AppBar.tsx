@@ -1,7 +1,7 @@
-import { Avatar } from "./AvatarGenerator";
 import { Link } from "react-router-dom";
 import {jwtDecode,JwtPayload}  from "jwt-decode";
 import { ToastContainer, toast } from 'react-toastify';
+import AvatarWithDropDown from './DropDown'
 
 // Extend the JwtPayload interface to include the 'name' property
 interface CustomJwtPayload extends JwtPayload {
@@ -55,7 +55,7 @@ function AppBar({ newBlogBtn = true }: { newBlogBtn?: boolean })  {
                             <button type="button" className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-4 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Go Back</button>
                         </Link>
                     </div>}
-                    <Avatar size ="big" name={`${userDetails?.name || 'Guest'}`}/>
+                    <AvatarWithDropDown  userName={`${userDetails?.name || 'Guest'}`}/>
                 </div>
             </div>
         </div>
